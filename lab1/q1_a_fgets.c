@@ -11,6 +11,6 @@ int main() {
 	char rline[BUFF_SIZE];
 	while(fgets(rline, BUFF_SIZE, infile))
 		printf("%d %s", ++line, rline);
-
+	fclose(infile);
 	return 0;
 }
