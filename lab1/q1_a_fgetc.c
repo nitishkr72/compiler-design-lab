@@ -4,9 +4,8 @@
 int main() {
 	FILE * infile;
 	char fname[15] = "lab1.txt";
-	infile = fopen(fname, "r");
 
-	if(infile) {
+	if((infile = fopen(fname, "r")) != NULL) {
 		int line=0;
 		char c = fgetc(infile);
 		printf("%d ", ++line);
