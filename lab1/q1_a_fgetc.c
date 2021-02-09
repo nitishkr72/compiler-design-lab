@@ -4,6 +4,9 @@
 int main() {
 	FILE * infile;
 	char fname[15] = "lab1.txt";
+	//uncomment below to take filemane fom terminal;
+	//printf("Enter file Name: ");
+	//scanf("%s", fname);
 
 	if((infile = fopen(fname, "r")) != NULL) {
 		int line=0;
