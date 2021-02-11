@@ -7,9 +7,9 @@
 
    1. Reading file in c
        
-       `a. Using fgetc`
+       a. Using fgetc
         
-       `b. Using fgets`
+       b. Using fgets
 
    2. printing specific Individual word in txt file
    
