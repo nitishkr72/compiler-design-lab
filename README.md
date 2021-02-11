@@ -1,10 +1,10 @@
 # compiler-design-lab
 ## Lab Assignment 1
-   :white_square_button: Reading file in c
+   1. Reading file in c
        
         a. Using fgetc
         b. Using fgets
 
-   :white_square_button: printing specific Individual word in txt file
+   2. printing specific Individual word in txt file
    
-   :white_square_button: writing text file or binary file
+   3. writing text file or binary file
