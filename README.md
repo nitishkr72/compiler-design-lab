@@ -6,7 +6,6 @@
        a. Using fgetc
         
        b. Using fgets
-       
        ```
 
    2. printing specific Individual word in txt file
