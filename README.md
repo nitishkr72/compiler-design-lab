@@ -4,7 +4,6 @@
 ## Lab Assignment 1
 
 ```
-
    1. Reading file in c
        
        a. Using fgetc
@@ -18,5 +17,4 @@
    4. implementing od in c
    
    5. implementing strings command in c
-
 ```
