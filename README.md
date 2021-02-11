@@ -1,4 +1,4 @@
-# System Software acd Compiler Design Lab
+# System Software and Compiler Design Lab
 ## Lab Assignment 1
    1. Reading file in c
        
