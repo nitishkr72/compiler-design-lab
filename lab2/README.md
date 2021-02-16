@@ -12,7 +12,7 @@ Imperative Statements:
     Instruction   Assembly	       Remarks
     Op-code       Instruction 
                   Format
-                
+    __________________________________________________________________________            
     00            STOP            Execution stops
   
     01            ADD   ONE       Add constant ONE to Accumulator (implicit
@@ -46,10 +46,9 @@ Imperative Statements:
 Assembler Directives:
                 
                 Assembly	Remarks
-                
                 Instruction
                 Format
-                
+                _____________________________________________________________________________
                 START  1000     Assume that program will be loaded from
                                 location 1000.
                 END             Consider it as the last instruction in the
@@ -59,11 +58,9 @@ Assembler Directives:
 Declarative Statements:
                 
                 Assembly	Remarks
-                
                 Instruction
-                
                 Format
-           
+           _______________________________________________________________________
            G    DS  20          Declare 20 bytes and call it as G
            
            ONE  DC  '1'         Store 1 in the required number of bytes and
