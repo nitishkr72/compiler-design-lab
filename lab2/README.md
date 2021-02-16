@@ -1,4 +1,4 @@
- Write a lexical analyser for the assembly language described above. The program should take as input a text file containing an assembly program and print the stream of token values corresponding to the items in the input file. For identifiers and numbers the actual input item should also appear within brackets along with the token value. e.g. the output may look like:
+### Write a lexical analyser for the assembly language described above. The program should take as input a text file containing an assembly program and print the stream of token values corresponding to the items in the input file. For identifiers and numbers the actual input item should also appear within brackets along with the token value. e.g. the output may look like:
 
     17 20(100) 21(AGAIN) 14 20(3) 21(TERM) .... 
 
