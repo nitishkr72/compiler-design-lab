@@ -9,9 +9,9 @@ A hypothetical Assembly Language:
 
 Imperative Statements:
 
-    Instruction     Assembly	Remarks
-
-    Op-code       Instruction Format
+    Instruction   Assembly	       Remarks
+    Op-code       Instruction 
+                  Format
                 
     00            STOP            Execution stops
   
