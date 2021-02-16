@@ -9,39 +9,38 @@ A hypothetical Assembly Language:
 
 Imperative Statements:
 
-Instruction     Assembly	Remarks
+    Instruction     Assembly	Remarks
 
-Op-code         Instruction
-                Format
+    Op-code       Instruction Format
                 
-  00            STOP            Execution stops
+    00            STOP            Execution stops
   
-  01            ADD   ONE       Add constant ONE to Accumulator (implicit
+    01            ADD   ONE       Add constant ONE to Accumulator (implicit
                                      operand)
   
-  02            SUB   NUM       Subtract NUM from accumulator
+    02            SUB   NUM       Subtract NUM from accumulator
   
-  03            MULT  TERM      Multiply accumulator contents by TERM
+    03            MULT  TERM      Multiply accumulator contents by TERM
   
-  04            LOAD  N         Load value of N into accumulator
+    04            LOAD  N         Load value of N into accumulator
   
-  05            STORE RESULT    Store value of accumulator in RESULT.
+    05            STORE RESULT    Store value of accumulator in RESULT.
   
-  06            TRANS NEXT      Transfer control to instruction with label NEXT
+    06            TRANS NEXT      Transfer control to instruction with label NEXT
   
-  07            TRIM  NEXT      Transfer control to NEXT if acc < 0
+    07            TRIM  NEXT      Transfer control to NEXT if acc < 0
   
-  08            DIV   D         Divide accumulator by D.
+    08            DIV   D         Divide accumulator by D.
   
-  09            READ  A         Read value read from input device into location A.
+    09            READ  A         Read value read from input device into location A.
   
-  10            PRINT COUNT     Print value of COUNT on terminal.
+    10            PRINT COUNT     Print value of COUNT on terminal.
   
-  11            LIR   4,A       Load index register 4 with last three digits of location A.
+    11            LIR   4,A       Load index register 4 with last three digits of location A.
   
-  12            IIR   3,A       Increment index register 3 with last three
+    12            IIR   3,A       Increment index register 3 with last three
                                 digits of operand A.
-  13            LOOP  4,AGAIN   Decrement index register 4. If new content > 0
+    13            LOOP  4,AGAIN   Decrement index register 4. If new content > 0
                                 transfer control to AGAIN.
 
 Assembler Directives:
@@ -49,7 +48,6 @@ Assembler Directives:
                 Assembly	Remarks
                 
                 Instruction
-                
                 Format
                 
                 START  1000     Assume that program will be loaded from
