@@ -58,7 +58,7 @@ int main(int argc, char *argv[]) {
 	while((token = yylex())!=TOK_EOF) {
 		if(token != TOK_SPACE) {
 			if(token>0 && token<14) {
-				printf("%d\t\t%d\t\t%s\n", token-1, token, yytext);
+				printf("%d\t\t%d\t\t%s\n", token+1, token, yytext);
 				string outline;
 				
 			} else {
