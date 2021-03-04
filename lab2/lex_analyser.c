@@ -1,142 +1,87 @@
+%{
 #include <stdio.h>
-#include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
-#include <ctype.h>
 
 #include "token.h"
 
-#define BUFF_SIZE 50
+#define MAXL 100
+%}
 
-int lex_analyser();
-int isKeyword(char str[]);
+DIGIT	[0-9]+
+ID	[a-zA-Z][a-zA-Z0-9]*
 
-FILE * ifp;
-char tokstr[BUFF_SIZE];
+%%
+START		return TOK_START;
+STOP		return TOK_STOP;
+ADD		return TOK_ADD;
+SUB		return TOK_SUB;
+MULT		return TOK_MULT;
+LOAD		return TOK_LOAD;
+STORE		return TOK_STORE;
+{DIGIT}		return TOK_NUM;
+TRANS		return TOK_TRANS;
+TRIM		return TOK_TRIM;
+DIV		return TOK_DIV;
+READ		return TOK_DIV;
+PRINT		return TOK_PRINT;
+LIR		return TOK_LIR;
+IIR		return TOK_IIR;
+LOOP		return TOK_LOOP;
+END		return TOK_END;
+LTORG		return TOK_LTORG;
+DS		return TOK_DS;
+DC		return TOK_DC;
+{ID}		return TOK_ID;
+","		return TOK_COMMA;
+"("		return TOK_OPEN_BRACE;
+")"		return TOK_CLOSE_BRACE;
+";"		return TOK_SEMICOLON;
+":"		return TOK_COLON;
+[ \t\n]+	return TOK_SPACE;
+<<EOF>>		return TOK_EOF;
+%%
 
-int main(int argc, char * argv[]) {
-	if(argc < 2 || (ifp = fopen(argv[1], "r")) == NULL ) {
-		printf("ERROR::file not found\n");
-		exit(1);
-	}
+int main(int argc, char *argv[]) {
+	if(argc < 2)
+		printf("Please enter filename\n");
 
 	int token;
-	while((token = lex_analyser()) != TOK_EOF) {
-		printf("%d (%s)\n", token, tokstr);
-	}
+	extern FILE * yyin;
+	FILE * outfile;
 
-	fclose(ifp);
-	exit(0);
-}
+	yyin = fopen(argv[1], "r");
+	outfile = fopen("code.bin", "wb");
 
+	printf("Opcode\t\tToken Value\t\tToken String\n");
+	fwrite("Opcode\t\tToken Value\t\tToken String\n", 1, MAXL, outfile);
 
-int isKeyword(char str[]) {
-	if (strcmp(str, "STOP"))
-		return TOK_STOP;
-	else if (strcmp(str, "ADD"))
-                return TOK_ADD;
-	else if (strcmp(str, "ONE"))
-		return TOK_ONE;
-	else if (strcmp(str, "SUB"))
-		return TOK_SUB;
-	else if (strcmp(str, "NUM"))
-		return TOK_NUM;
-	else if (strcmp(str, "MULT"))
-		return TOK_MULT;
-	else if (strcmp(str, "TERM"))
-		return TOK_TERM;
-	else if (strcmp(str, "LOAD"))
-		return TOK_LOAD;
-	else if (strcmp(str, "STORE"))
-		return TOK_STORE;
-	else if (strcmp(str, "RESULT"))
-		return TOK_RESULT;
-	else if (strcmp(str, "TRANS"))
-		return TOK_TRANS;
-	else if (strcmp(str, "NEXT"))
-		return TOK_NEXT;
-	else if (strcmp(str, "TRIM"))
-		return TOK_TRIM;
-	else if (strcmp(str, "DIV"))
-		return TOK_DIV;
-	else if (strcmp(str, "READ"))
-		return TOK_READ;
-	else if (strcmp(str, "PRINT"))
-		return TOK_PRINT;
-	else if (strcmp(str, "COUNT"))
-		return TOK_COUNT;
-	else if (strcmp(str, "LIR"))
-		return TOK_LIR;
-	else if (strcmp(str, "IIR"))
-		return TOK_IIR;
-	else if (strcmp(str, "LOOP"))
-		return TOK_LOOP;
-	else if (strcmp(str, "AGAIN"))
-		return TOK_AGAIN;
-	else if (strcmp(str, "START"))
-		return TOK_START;
-	else if (strcmp(str, "END"))
-		return TOK_END;
-	else if (strcmp(str, "LTORG"))
-		return TOK_LTORG;
-	else if (strcmp(str, "DS"))
-		return TOK_DS;
-	else if (strcmp(str, "DC"))
-		return TOK_DC;
-	else
-		return 0;
-}
-
-
-int lex_analyser() {
-	int i = 0, ch;
-	while((ch = fgetc(ifp)) != EOF) {
-		switch(ch) {
-			case ',':
-				tokstr[0] = ','; tokstr[1] = '\0';
-				return TOK_COMMA;
-			case ';':
-				tokstr[0] = ';'; tokstr[1] = '\0';
-				return TOK_SEMICOLON;
-			case '(':
-				tokstr[0] = '('; tokstr[1] = '\0';
-				return TOK_OPEN_BRACE;
-			case ')':
-				tokstr[0] = ')'; tokstr[1] = '\0';
-				return TOK_CLOSE_BRACE;
-			case ':':
-				tokstr[0] = ':'; tokstr[1] = '\0';
-				return TOK_COLON;
-			default:
-				if(isalpha(ch)) {
-					int ch1, kw;
-					tokstr[i++] = ch;
-					while(isalnum(ch1 = fgetc(ifp)))
-						tokstr[i++] = ch1;
-					tokstr[i] = '\0';
-					ungetc(ch1, ifp);
-					if((kw = isKeyword(tokstr)) != 0)
-						return kw;
-					else
-						return TOK_ID;
-				} else if (isdigit(ch)) {
-					int ch1;
-					tokstr[i++] = ch;
-					while(isdigit(ch1 = fgetc(ifp)))
-						tokstr[i++] = ch1;
-					tokstr[i] = '\0';
-					ungetc(ch1, ifp);
-					return TOK_NUM;
-				} else if (isspace(ch)) {
-					int ch1;
-					tokstr[i++] = ch;
-					while(isspace(ch1 = fgetc(ifp)))
-						tokstr[i++] = ch1;
-					tokstr[i] = '\0';
-					ungetc(ch1, ifp);
-					return TOK_SPACE;
-				}
+	while((token = yylex())!=TOK_EOF) {
+		char s[MAXL] = "";
+		char num[10];
+		if(token != TOK_SPACE) {
+			if(token>0 && token<14) {
+				fprintf(stdout, "%d\t\t%d\t\t%s\n", token-1, token, yytext);
+				sprintf(num, "%d", token-1); strcat(s, num);
+				strcat(s, "\t\t");
+				sprintf(num, "%d", token); strcat(s, num);
+				strcat(s, "\t\t");
+				strcat(s, yytext);
+				strcat(s, "\n");
+				fwrite(s, 1, sizeof(s), outfile);
+				
+			} else {
+				fprintf(stdout, "\t\t%d\t\t%s\n", token, yytext);
+				strcat(s, "\t\t");
+				sprintf(num, "%d", token); strcat(s, num);
+				strcat(s, "\t\t");
+				strcat(s, yytext);
+				strcat(s, "\n");
+				fwrite(s, 1, sizeof(s), outfile);
+			}
 		}
 	}
-	return TOK_EOF;
+
+	fclose(yyin);
+	fclose(outfile);
 }
