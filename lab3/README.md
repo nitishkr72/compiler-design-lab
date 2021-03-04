@@ -7,7 +7,7 @@ file in binary format.
 
 ### Running flex
 
-Create a assembly progam and save it to a file.
+write an assembly program and save it to a file(say filename.asm).
 
 To run lspecs.l
 
